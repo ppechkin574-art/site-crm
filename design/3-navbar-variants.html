@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Варианты навбара</title>
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .variant { margin-bottom: 64px; }
+  .v-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .v-head h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .v-letter { background: var(--text); color: #fff; font-weight: 700; border-radius: 8px; padding: 2px 10px; }
+  .v-desc { color: var(--text-2); font-size: 15px; margin-bottom: 16px; max-width: 760px; }
+  .cap { font-size: 12px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 8px; }
+
+  /* «Экран» с куском страницы под навбаром */
+  .screen { background: var(--bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--card-strong); position: relative; }
+  .screen.phone { width: 390px; max-width: 100%; border-radius: 36px; border: 8px solid #1C1C1E; height: 520px; }
+  .page { padding: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .phone .page { grid-template-columns: repeat(2, 1fr); padding: 16px; }
+  .ghost-card { height: 92px; background: #fff; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--card-strong); }
+  .ghost-card.wide { grid-column: span 2; height: 140px; }
+  .phone .ghost-card.wide { grid-column: span 2; }
+  .row { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
+  .row > .desk { flex: 1 1 640px; min-width: 0; }
+
+  .bar { display: flex; align-items: center; gap: 14px; padding: 12px 16px; }
+  .name { font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .name small { display: block; font-size: 12px; font-weight: 500; color: var(--text-2); }
+  .scroller { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+  .scroller::-webkit-scrollbar { display: none; }
+  .t { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border-radius: 10px; font-size: 15px; font-weight: 600; color: var(--text-2); }
+  .t .ic { opacity: .9; }
+
+  /* A — белая панель на всю ширину с тенью */
+  .A .bar { background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.08); }
+  .A .t.on { background: var(--text); color: #fff; }
+  .A .phone .bar { flex-wrap: wrap; padding: 10px 14px 10px; }
+  .A .phone .scroller { flex-basis: 100%; order: 3; }
+
+  /* B — плавающий «остров» */
+  .B .bar { margin: 12px; background: #fff; border-radius: 18px; box-shadow: var(--shadow-lg); border: 1px solid var(--card-strong); padding: 8px 8px 8px 10px; }
+  .B .track { background: var(--inset); border-radius: 12px; padding: 3px; }
+  .B .t { min-height: 34px; padding: 0 12px; font-size: 14px; }
+  .B .t.on { background: #fff; color: var(--text); box-shadow: var(--shadow-sm); }
+  .B .phone .bar { flex-wrap: wrap; margin: 10px; }
+  .B .phone .track { flex-basis: 100%; order: 3; }
+
+  /* C — тёмная панель */
+  .C .bar { background: #1C1C1E; color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+  .C .icon-btn { background: #2C2C2E; border-color: #3A3A3C; color: #fff; box-shadow: none; }
+  .C .tasks-btn { background: #2C2C2E; border-color: #3A3A3C; color: #fff; box-shadow: none; --badge-ring: #1C1C1E; }
+  .C .t { color: #AEAEB2; }
+  .C .t.on { background: #fff; color: #1C1C1E; }
+  .C .phone .bar { flex-wrap: wrap; }
+  .C .phone .scroller { flex-basis: 100%; order: 3; }
+
+  /* D — шапка филиала + вкладки с иконками; на телефоне нижний таб-бар как в iOS */
+  .D .hdr { background: #fff; display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid var(--card-strong); }
+  .D .thumb { width: 44px; height: 44px; border-radius: 12px; }
+  .D .thumb svg { width: 20px; height: 20px; }
+  .D .tabsrow { background: #fff; display: flex; gap: 8px; padding: 0 16px; box-shadow: 0 6px 18px rgba(0,0,0,.07); overflow-x: auto; scrollbar-width: none; }
+  .D .tabsrow .t { flex-direction: column; gap: 3px; border-radius: 0; padding: 8px 10px 9px; font-size: 13px; min-height: 0; border-bottom: 3px solid transparent; }
+  .D .tabsrow .t.on { color: var(--blue); border-bottom-color: var(--blue); }
+  .D .tabbar { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,.94); border-top: 1px solid var(--card-strong);
+    display: flex; justify-content: space-around; padding: 6px 4px 18px; box-shadow: 0 -6px 18px rgba(0,0,0,.06); }
+  .D .tabbar .t { flex-direction: column; gap: 2px; font-size: 10px; padding: 4px 2px; min-height: 0; flex: 1; }
+  .D .tabbar .t.on { color: var(--blue); }
+
+  .pc { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; font-size: 14px; color: var(--text-2); margin-top: 14px; max-width: 760px; }
+  .pc li::before { content: "+ "; color: var(--green-ink); font-weight: 700; }
+  .pc li.m::before { content: "− "; color: var(--red-ink); }
+  @media (max-width: 640px) { .pc { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1 class="h1">Варианты навбара</h1>
+  <p class="sub" style="margin-bottom:36px">Под каждым — вид на компьютере и на телефоне. Иконки — Solar Bold Duotone.</p>
+  <div id="root"></div>
+</main>
+
+<script type="module">
+import { icon } from '../js/icons.js';
+
+const SECS = [['Обзор', 'widget-2'], ['Снабжение', 'cart-large-2'], ['Найм', 'user-id'], ['Маркетинг', 'speaker-minimalistic'], ['Аренда зала', 'key-minimalistic-square'], ['Юр. часть', 'document-text']];
+const back = `<a class="icon-btn">${icon('alt-arrow-left', { size: 22 })}</a>`;
+const tasks = `<button class="tasks-btn">${icon('checklist-minimalistic', { style: 'duo', size: 22 })}<span class="badge">4</span></button>`;
+const name = `<div class="name"><span class="dot r"></span>Филиал «Север»</div>`;
+const tabs = (withIcons) => SECS.map(([n, ic], i) => `<span class="t ${i === 0 ? 'on' : ''}">${withIcons ? icon(ic, { style: 'duo', size: 18 }) : ''}${n}</span>`).join('');
+const page = (phone) => `<div class="page">${'<div class="ghost-card wide"></div>' + '<div class="ghost-card"></div>'.repeat(phone ? 4 : 6)}</div>`;
+
+const V = [
+  { id: 'A', title: 'Белая панель на всю ширину', desc: 'Сплошная белая полоса с мягкой тенью отделяет навбар от серого фона. Активный раздел — тёмная «пилюля». Сейчас стоит в сайте.',
+    pros: ['Самый простой и привычный', 'Отлично отделяется от серого фона', 'Вкладки листаются на телефоне'], cons: ['Нейтральный, без характера'],
+    bar: (p) => `<div class="bar">${back}${name}${p ? '<span style="flex:1"></span>' : ''}<div class="scroller">${tabs(false)}</div>${tasks}</div>` },
+  { id: 'B', title: 'Плавающий «остров»', desc: 'Навбар — отдельная белая карточка с большой тенью, висит над страницей с отступом. Вкладки — сегментированный переключатель iOS в сером треке.',
+    pros: ['Очень заметно отделён', 'Современный вид, как в macOS / iPadOS', 'Перекликается с карточками страницы'], cons: ['Занимает чуть больше высоты'],
+    bar: (p) => `<div class="bar">${back}${name}${p ? '<span style="flex:1"></span>' : ''}<div class="scroller track">${tabs(false)}</div>${tasks}</div>` },
+  { id: 'C', title: 'Тёмная панель', desc: 'Графитовая полоса. Максимальный контраст с серым фоном и белыми карточками; активная вкладка — белая.',
+    pros: ['Сильнее всего отделяется', 'Чёткая иерархия: навигация ↔ контент'], cons: ['Тяжелее визуально, меньше «минимализма»', 'Тёмный верх на телефоне'],
+    bar: (p) => `<div class="bar">${back}${name}${p ? '<span style="flex:1"></span>' : ''}<div class="scroller">${tabs(true)}</div>${tasks}</div>` },
+  { id: 'D', title: 'Шапка филиала + вкладки с иконками · на телефоне нижний таб-бар', desc: 'Сверху — шапка с мини-фото филиала, адресом и задачами; под ней вкладки с иконками и синим подчёркиванием. На телефоне разделы уезжают в нижний таб-бар, как в приложениях iOS (5 пунктов + «Ещё»).',
+    pros: ['Нативно для iPhone: разделы под большим пальцем', 'Иконки ускоряют поиск раздела', 'Видно фото и адрес филиала'], cons: ['Сложнее в реализации', 'При >5 разделах часть прячется в «Ещё»'],
+    custom: true },
+];
+
+const D_desk = () => `
+  <div class="hdr"><div class="photo tone-2 thumb">${icon('camera', { size: 20 })}</div><div class="name" style="flex:1;display:block">Филиал «Север» <span class="dot r" style="margin-left:6px"></span><small>пр. Мира, 45 · Д. Петров</small></div>${back.replace('icon-btn', 'icon-btn" style="order:-1')}${tasks}</div>
+  <div class="tabsrow">${tabs(true)}</div>`;
+const D_phone = () => `
+  <div class="hdr">${back}<div class="name" style="flex:1;display:block;min-width:0">Филиал «Север»<small>пр. Мира, 45</small></div>${tasks}</div>
+  ${page(true)}
+  <div class="tabbar">${SECS.slice(0, 4).map(([n, ic], i) => `<span class="t ${i === 0 ? 'on' : ''}">${icon(ic, { style: 'duo', size: 24 })}${n}</span>`).join('')}<span class="t">${icon('widget-2', { size: 24 })}Ещё</span></div>`;
+
+document.getElementById('root').innerHTML = V.map(v => `
+  <section class="variant ${v.id}">
+    <div class="v-head"><span class="v-letter">${v.id}</span><h2>${v.title}</h2></div>
+    <p class="v-desc">${v.desc}</p>
+    <div class="row">
+      <div class="desk"><div class="cap">Компьютер</div><div class="screen">${v.custom ? D_desk() : v.bar(false)}${page(false)}</div></div>
+      <div><div class="cap">Телефон</div><div class="screen phone">${v.custom ? D_phone() : v.bar(true) + page(true)}</div></div>
+    </div>
+    <ul class="pc">${v.pros.map(x => `<li>${x}</li>`).join('')}${v.cons.map(x => `<li class="m">${x}</li>`).join('')}</ul>
+  </section>`).join('');
+</script>
+</body>
+</html>

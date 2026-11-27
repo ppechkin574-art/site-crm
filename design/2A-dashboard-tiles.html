@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2A — Филиал: обзор (плитки KPI)</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  .head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+  .period { display: inline-flex; background: var(--card-strong); border-radius: 10px; padding: 3px; }
+  .period button { padding: 7px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--text-2); }
+  .period button.on { background: #fff; color: var(--text); box-shadow: var(--shadow-sm); }
+
+  .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
+  .kpis .card { padding: 18px 20px; }
+  .kpis .num { font-size: 30px; margin: 8px 0 4px; }
+  .kpis .d { font-size: 13px; color: var(--text-2); }
+  @media (max-width: 1000px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+
+  .two { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; } }
+  .panel { padding: 22px 24px; }
+  .panel h3 { font-size: 17px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+
+  .chart { display: flex; align-items: flex-end; gap: 10px; height: 200px; position: relative; padding-top: 8px; }
+  .chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+  .chart .b { width: 100%; max-width: 44px; border-radius: 8px 8px 3px 3px; background: #C7C7CC; box-shadow: var(--shadow-sm); }
+  .chart .b.cur { background: var(--blue); }
+  .chart .m { font-size: 12px; color: var(--text-2); }
+  .chart .plan { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--red); }
+  .chart .plan span { position: absolute; right: 0; top: -22px; font-size: 12px; font-weight: 600; color: var(--red); background: var(--card); padding: 0 4px; }
+
+  .tl { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .tl li { background: #fff; border: 1px solid var(--card-strong); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-sm);
+    display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
+  .tl li .dot { margin-top: 5px; }
+  .tl li small { display: block; color: var(--text-2); margin-top: 2px; font-size: 12px; }
+
+  .cats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  @media (max-width: 1000px) { .cats { grid-template-columns: repeat(2, 1fr); } }
+  .cat { padding: 16px 18px; border-top: 4px solid var(--c); }
+  .cat.g { --c: var(--green); } .cat.o { --c: var(--orange); } .cat.r { --c: var(--red); }
+  .cat .t { font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; }
+  .cat .v { font-size: 20px; font-weight: 700; margin-top: 10px; }
+</style>
+</head>
+<body>
+<header class="topbar" id="nav"></header>
+
+<div class="wrap">
+  <section id="overview">
+    <div class="head">
+      <div><div class="h1">Обзор</div><div class="sub">Филиал «Север» · пр. Мира, 45 · управляющий Д. Петров</div></div>
+      <div class="period"><button>Неделя</button><button class="on">Месяц</button><button>Квартал</button><button>Год</button></div>
+    </div>
+
+    <div class="kpis">
+      <div class="card"><div class="label">Выручка</div><div class="num">710 тыс ₽</div><div class="d"><span class="down">78%</span> от плана</div></div>
+      <div class="card"><div class="label">Активные ученики</div><div class="num">96</div><div class="d"><span class="down">−8</span> за месяц</div></div>
+      <div class="card"><div class="label">Посещаемость</div><div class="num">64%</div><div class="d"><span class="down">−6 п.</span> к прошлому</div></div>
+      <div class="card"><div class="label">Новые заявки</div><div class="num">23</div><div class="d"><span class="up">+5</span> · конверсия 30%</div></div>
+      <div class="card"><div class="label">Продления абонем.</div><div class="num">71%</div><div class="d"><span class="up">+2 п.</span> к прошлому</div></div>
+    </div>
+
+    <div class="two">
+      <div class="card panel">
+        <h3>Выручка по месяцам <span class="label">тыс ₽</span></h3>
+        <div class="chart" id="chart"></div>
+      </div>
+      <div class="card panel">
+        <h3>Требует внимания <span class="pill r">4</span></h3>
+        <ul class="tl">
+          <li><span class="dot r"></span><div>Договор аренды истекает<small>через 14 дней · Юр. часть</small></div></li>
+          <li><span class="dot r"></span><div>Закончились бинты и капы<small>заявка не создана · Снабжение</small></div></li>
+          <li><span class="dot o"></span><div>Вакансия тренера открыта 21 день<small>2 кандидата · Найм</small></div></li>
+          <li><span class="dot g"></span><div>Субаренда зала в субботу оплачена<small>вчера · Аренда</small></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:20px;font-weight:700;margin:8px 0 16px">По разделам</h3>
+    <div class="cats">
+      <div class="card cat r"><div class="t">Снабжение <span class="dot r"></span></div><div class="v">3 заявки</div><div class="label">1 просрочена</div></div>
+      <div class="card cat o"><div class="t">Найм <span class="dot o"></span></div><div class="v">1 вакансия</div><div class="label">открыта 21 день</div></div>
+      <div class="card cat g"><div class="t">Маркетинг <span class="dot g"></span></div><div class="v">412 ₽</div><div class="label">стоимость заявки</div></div>
+      <div class="card cat g"><div class="t">Аренда зала <span class="dot g"></span></div><div class="v">38 тыс ₽</div><div class="label">доход за месяц</div></div>
+      <div class="card cat r"><div class="t">Юр. часть <span class="dot r"></span></div><div class="v">14 дней</div><div class="label">до конца договора</div></div>
+    </div>
+  </section>
+  <div id="emptyHost"></div>
+</div>
+
+<div class="variant-tag">Вариант 2A · KPI-плитки + график <a href="index.html">все варианты</a></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/nav.js"></script>
+<script>
+document.getElementById('emptyHost').outerHTML = EMPTY_HTML;
+renderNav(document.getElementById('nav'), 'Филиал «Север»', 'pill');
+
+const months = [['Июн', 820], ['Июл', 760], ['Авг', 690], ['Сен', 880], ['Окт', 840], ['Ноя', 710]];
+const max = 1000, plan = 910;
+document.getElementById('chart').innerHTML =
+  months.map(([m, v], i) => `<div class="col"><div class="label" style="font-weight:600;color:var(--text)">${v}</div><div class="b ${i === months.length - 1 ? 'cur' : ''}" style="height:${v / max * 150}px"></div><div class="m">${m}</div></div>`).join('') +
+  `<div class="plan" style="bottom:${plan / max * 150 + 28}px"><span>план ${plan}</span></div>`;
+</script>
+</body>
+</html>

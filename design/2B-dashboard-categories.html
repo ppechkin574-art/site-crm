@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2B — Филиал: обзор (по разделам)</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  .hero { display: grid; grid-template-columns: 300px 1fr; gap: 0; overflow: hidden; margin-bottom: 28px; }
+  .hero .photo { min-height: 200px; }
+  .hero .info { padding: 24px 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+  .hero .meta { color: var(--text-2); font-size: 14px; margin-top: 6px; }
+  .hero .stats { display: flex; gap: 32px; margin-top: 20px; flex-wrap: wrap; }
+  .hero .stats .num { font-size: 26px; }
+  .score { width: 132px; height: 132px; position: relative; }
+  .score svg { transform: rotate(-90deg); }
+  .score .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score .c b { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; }
+  @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .hero .info { grid-template-columns: 1fr; } }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } }
+  .sec { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s, box-shadow .2s; cursor: pointer; }
+  .sec:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .sec .t { display: flex; justify-content: space-between; align-items: center; }
+  .sec h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; display: flex; gap: 10px; align-items: center; }
+  .sec .ic { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; box-shadow: var(--shadow-sm); }
+  .sec .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sec .pair div { background: #fff; border: 1px solid var(--card-strong); border-radius: 12px; padding: 10px 12px; box-shadow: var(--shadow-sm); }
+  .sec .pair b { display: block; font-size: 20px; font-weight: 700; margin-top: 2px; letter-spacing: -0.02em; }
+  .sec .last { font-size: 13px; color: var(--text-2); border-top: 1px solid var(--card-strong); padding-top: 12px; }
+  .sec.extra { border-style: dashed; border-color: var(--border); box-shadow: var(--shadow-sm); }
+</style>
+</head>
+<body>
+<header class="topbar" id="nav"></header>
+
+<div class="wrap">
+  <section id="overview">
+    <div class="hero card">
+      <div class="photo p-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+      <div class="info">
+        <div>
+          <div class="h1">Филиал «Север»</div>
+          <div class="meta">пр. Мира, 45 · управляющий Д. Петров · ноябрь 2026</div>
+          <div class="stats">
+            <div><div class="label">Выручка</div><div class="num">710 тыс <span class="down" style="font-size:15px">78%</span></div></div>
+            <div><div class="label">Ученики</div><div class="num">96 <span class="down" style="font-size:15px">−8</span></div></div>
+            <div><div class="label">Посещаемость</div><div class="num">64%</div></div>
+            <div><div class="label">Задачи</div><div class="num">9 <span class="down" style="font-size:15px">4 просроч.</span></div></div>
+          </div>
+        </div>
+        <div class="score">
+          <svg viewBox="0 0 120 120" width="132" height="132">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E5EA" stroke-width="12"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--red)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 400" id="ring"/>
+          </svg>
+          <div class="c"><b>58</b><span class="label">индекс здоровья</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </section>
+  <div id="emptyHost"></div>
+</div>
+
+<div class="variant-tag">Вариант 2B · Обзор по разделам <a href="index.html">все варианты</a></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/nav.js"></script>
+<script>
+document.getElementById('emptyHost').outerHTML = EMPTY_HTML;
+renderNav(document.getElementById('nav'), 'Филиал «Север»', 'line');
+
+const L = 2 * Math.PI * 52;
+document.getElementById('ring').setAttribute('stroke-dasharray', `${L * .58} ${L}`);
+
+const CATS = [
+  { n: 'Снабжение',   ic: '📦', c: '#FF9500', s: 'r', a: ['Открытых заявок', '3'], b: ['Расход за месяц', '42 тыс'], last: 'Бинты и капы закончились — заявка не создана' },
+  { n: 'Найм',        ic: '👥', c: '#5856D6', s: 'o', a: ['Вакансии', '1'], b: ['Кандидаты', '2'], last: 'Собеседование тренера — пт, 15:00' },
+  { n: 'Маркетинг',   ic: '📣', c: '#FF2D55', s: 'g', a: ['Заявки', '23'], b: ['Цена заявки', '412 ₽'], last: 'Таргет VK: +5 заявок за неделю' },
+  { n: 'Аренда зала', ic: '🥊', c: '#34C759', s: 'g', a: ['Часов сдано', '19'], b: ['Доход', '38 тыс'], last: 'Суббота 10:00–13:00 оплачена' },
+  { n: 'Юр. часть',   ic: '⚖️', c: '#007AFF', s: 'r', a: ['Договоров', '7'], b: ['Истекает', '14 дн.'], last: 'Продлить договор аренды помещения' },
+  { n: 'Финансы',     ic: '₽',  c: '#1C1C1E', s: 'o', extra: true, a: ['Прибыль', '96 тыс'], b: ['Долги учеников', '31 тыс'], last: 'Предложенный раздел' },
+];
+document.getElementById('grid').innerHTML = CATS.map(x => `
+  <div class="sec card ${x.extra ? 'extra' : ''}">
+    <div class="t">
+      <h3><span class="ic" style="background:${x.c}">${x.ic}</span>${x.n}</h3>
+      <span class="pill ${x.s}"><span class="dot ${x.s}"></span>${STATUS_TEXT[x.s]}</span>
+    </div>
+    <div class="pair"><div><span class="label">${x.a[0]}</span><b>${x.a[1]}</b></div><div><span class="label">${x.b[0]}</span><b>${x.b[1]}</b></div></div>
+    <div class="last">${x.last}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>

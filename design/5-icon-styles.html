@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стили иконок</title>
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .style { padding: 22px; margin-top: 24px; }
+  .style.cur { outline: 3px solid var(--blue); outline-offset: -1px; }
+  .style-h { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .style-h h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .ctx { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 18px 0; }
+  .ctx > div { background: var(--inset); border-radius: 16px; padding: 14px; min-width: 0; }
+  .ctx .stat { background: #fff; box-shadow: var(--shadow-sm); border-radius: 14px; }
+  .demo-tabs { display: flex; gap: 2px; padding: 3px; background: #fff; border-radius: 13px; overflow-x: auto; scrollbar-width: none; }
+  .demo-tabs .tab { font-size: 13px; padding: 0 10px; min-height: 34px; }
+  .demo-tabs .tab.on { background: var(--inset); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px 8px; border-radius: 12px; background: var(--inset); color: var(--text); }
+  .cell span { font-size: 10px; color: var(--text-3); text-align: center; overflow-wrap: anywhere; }
+  .sizes { display: flex; align-items: center; gap: 18px; color: var(--text); }
+  .cap { font-size: 12px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1 class="h1">Стили иконок Solar</h1>
+  <p class="sub">Все четыре — контурные, без заливки и без фона. Синяя рамка — стиль, который сейчас стоит на сайте.</p>
+  <div id="root"></div>
+</main>
+
+<script src="assets/solar-styles.js"></script>
+<script>
+const STYLES = [
+  ['linear', 'Linear', 'Тонкий ровный контур 1.5px. Самый чистый и «эппловский».'],
+  ['line-duotone', 'Line Duotone', 'Контур, часть линий полупрозрачная — добавляет глубину, но без заливки.'],
+  ['broken', 'Broken', 'Контур с разрывами — более живой, «дизайнерский» характер.'],
+  ['outline', 'Outline', 'Тот же контур, но толще и плотнее — лучше читается на мелких размерах.'],
+];
+const ic = (set, name, size = 22) => `<svg class="ic" viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${SOLAR[set][name] || ''}</svg>`;
+const TABS = [['Обзор', 'widget-2'], ['Снабжение', 'cart-large-2'], ['Найм', 'user-id'], ['Маркетинг', 'speaker-minimalistic'], ['Аренда', 'key-minimalistic-square'], ['Юр. часть', 'document-text']];
+
+document.getElementById('root').innerHTML = STYLES.map(([id, title, desc], i) => {
+  const s = SOLAR[id];
+  return `
+  <section class="card style ${i === 0 ? 'cur' : ''}">
+    <div class="style-h"><h2>${title}</h2>${i === 0 ? '<span class="pill n">сейчас на сайте</span>' : ''}</div>
+    <p class="sub">${desc}</p>
+    <div class="ctx">
+      <div>
+        <div class="cap">Показатель</div>
+        <div class="stat" style="padding:14px 16px">
+          <div class="stat-head"><span class="kpi-ic">${ic(id, 'wallet-money')}</span><span class="label lab">Выручка <span class="info">${ic(id, 'info-circle', 16)}</span></span></div>
+          <div class="num">1,42 млн ₽</div><div class="label" style="margin-top:4px"><span class="up">104%</span> от плана</div>
+        </div>
+      </div>
+      <div>
+        <div class="cap">Вкладки навбара</div>
+        <div class="demo-tabs">${TABS.map(([n, k], j) => `<span class="tab ${j === 0 ? 'on' : ''}">${ic(id, k, 18)}${n}</span>`).join('')}</div>
+        <div class="cap" style="margin-top:16px">Размеры 16 · 20 · 24 · 32</div>
+        <div class="sizes">${[16, 20, 24, 32].map(z => ic(id, 'checklist-minimalistic', z)).join('')}${[16, 20, 24, 32].map(z => ic(id, 'users-group-rounded', z)).join('')}</div>
+      </div>
+    </div>
+    <div class="cap">Весь набор сайта</div>
+    <div class="grid">${Object.keys(s).map(k => `<div class="cell">${ic(id, k, 26)}<span>${k}</span></div>`).join('')}</div>
+  </section>`;
+}).join('');
+</script>
+</body>
+</html>

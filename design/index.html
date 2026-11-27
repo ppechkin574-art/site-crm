@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Варианты макетов</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  .g { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 16px 0 40px; }
+  .g a { padding: 20px 22px; display: block; transition: transform .2s, box-shadow .2s; }
+  .g a:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .g b { font-size: 18px; display: block; margin-bottom: 6px; }
+  h2 { font-size: 22px; font-weight: 700; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="h1">Варианты макетов CRM</div>
+  <div class="sub">Откройте каждый и выберите направление</div>
+
+  <h2>Страница 1 — выбор филиала</h2>
+  <div class="g">
+    <a class="card" href="1A-branches-grid.html"><b>1A · Сетка карточек</b><span class="sub">Фото, статус, задачи, 3 KPI, сводка по сети сверху</span></a>
+    <a class="card" href="1B-branches-list.html"><b>1B · Список с метриками</b><span class="sub">Плотная таблица-лента, проблемные сверху, фильтры и поиск</span></a>
+    <a class="card" href="1C-branches-photo.html"><b>1C · Крупные фото</b><span class="sub">Акцент на фото, минимум цифр</span></a>
+  </div>
+
+  <h2>Страница 2 — филиал, обзор</h2>
+  <div class="g">
+    <a class="card" href="2A-dashboard-tiles.html"><b>2A · KPI-плитки + график</b><span class="sub">Навбар-«пилюли», ключевые цифры, лента проблем, мини-статусы разделов</span></a>
+    <a class="card" href="2B-dashboard-categories.html"><b>2B · Обзор по разделам</b><span class="sub">Навбар с подчёркиванием, шапка с фото и индексом здоровья, карточка на каждый раздел</span></a>
+  </div>
+
+  <h2>Навбар и графики</h2>
+  <div class="g">
+    <a class="card" href="3-navbar-variants.html"><b>3 · Варианты навбара</b><span class="sub">4 варианта: белая панель, плавающий остров, тёмная, шапка + нижний таб-бар</span></a>
+    <a class="card" href="5-icon-styles.html"><b>5 · Стили иконок</b><span class="sub">Solar: Linear, Line Duotone, Broken, Outline — в реальных элементах</span></a>
+    <a class="card" href="4-chart-libraries.html"><b>4 · Библиотеки графиков</b><span class="sub">Chart.js, ApexCharts, ECharts, uPlot — живые примеры и сравнение</span></a>
+  </div>
+</div>
+</body>
+</html>

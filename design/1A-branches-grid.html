@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1A — Выбор филиала (сетка)</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+
+  .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .summary .card { padding: 18px 20px; }
+  .summary .num { margin-top: 6px; font-size: 28px; }
+  @media (max-width: 900px) { .summary { grid-template-columns: repeat(2, 1fr); } }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } }
+
+  .branch { overflow: hidden; transition: transform .2s, box-shadow .2s; display: block; }
+  .branch:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .branch .photo { aspect-ratio: 16/9; }
+  .branch .type { position: absolute; left: 14px; top: 14px; background: rgba(255,255,255,.92); color: var(--text);
+    font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 8px; }
+  .branch .body { padding: 18px 20px 20px; }
+  .branch .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .branch h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+  .branch .addr { color: var(--text-2); font-size: 14px; margin-top: 3px; }
+  .branch .status { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .kpi { background: #fff; border-radius: var(--r-sm); padding: 10px 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--card-strong); }
+  .kpi .v { font-size: 18px; font-weight: 700; margin-top: 2px; letter-spacing: -0.02em; }
+  .kpi .v small { font-size: 12px; margin-left: 3px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--card-strong); font-size: 13px; color: var(--text-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="h1">Филиалы</div>
+      <div class="sub">Выберите филиал, чтобы открыть показатели</div>
+    </div>
+    <div class="label">Обновлено сегодня, 10:42</div>
+  </header>
+
+  <!-- Предложение: сводка по всей сети -->
+  <section class="summary">
+    <div class="card"><div class="label">Учеников в сети</div><div class="num">691 <small class="up" style="font-size:15px">+18</small></div></div>
+    <div class="card"><div class="label">Выручка за месяц</div><div class="num">7,66 млн ₽</div></div>
+    <div class="card"><div class="label">Открытых задач</div><div class="num">25 <small class="down" style="font-size:15px">7 просрочено</small></div></div>
+    <div class="card"><div class="label">Требуют внимания</div><div class="num" style="color:var(--red)">3 из 6</div></div>
+  </section>
+
+  <section class="grid" id="grid"></section>
+</div>
+
+<div class="variant-tag">Вариант 1A · Сетка карточек <a href="index.html">все варианты</a></div>
+
+<script src="assets/data.js"></script>
+<script>
+document.getElementById('grid').innerHTML = BRANCHES.map(b => {
+  const kpis = b.type === 'school'
+    ? [['Ученики', `${b.students}<small>${fmtDelta(b.studentsDelta)}</small>`], ['План', fmtPlan(b.plan)], ['Посещ.', b.attendance + '%']]
+    : [['Чеки', `${b.checks}<small>${fmtDelta(b.checksDelta)}</small>`], ['План', fmtPlan(b.plan)], ['Мало на складе', b.stock]];
+  return `
+  <a class="branch card" href="2A-dashboard-tiles.html">
+    <div class="photo ${b.p}">${ICON_CAMERA}<span class="type">${b.type === 'shop' ? 'Магазин' : 'Школа бокса'}</span></div>
+    <div class="body">
+      <div class="top">
+        <div><h3>${b.name}</h3><div class="addr">${b.addr}</div></div>
+        ${tasksIcon(b)}
+      </div>
+      <div class="status">
+        <span class="pill ${b.status}"><span class="dot ${b.status}"></span>${STATUS_TEXT[b.status]}</span>
+        ${b.overdue ? `<span class="pill r">${ICON_ALERT} ${b.overdue} просрочено</span>` : ''}
+        ${b.alert ? `<span class="pill n">${b.alert}</span>` : ''}
+      </div>
+      <div class="kpis">${kpis.map(([l, v]) => `<div class="kpi"><div class="label">${l}</div><div class="v">${v}</div></div>`).join('')}</div>
+      <div class="foot"><span>Управляющий: <b style="color:var(--text)">${b.manager}</b></span>${ICON_CHEVRON}</div>
+    </div>
+  </a>`;
+}).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+{
+  "version": 3,
+  "updatedAt": "2026-11-26",
+  "branches": [
+    {
+      "id": "kurmangazy",
+      "type": "school",
+      "name": "Курмангазы 117а",
+      "addr": "",
+      "manager": "А. Иванов",
+      "photo": "img/branches/kurmangazy.jpg",
+      "tone": 1,
+      "metrics": {
+        "students": 184,
+        "studentsDelta": 12,
+        "attendance": 87,
+        "attendanceDelta": 2,
+        "leads": 31,
+        "leadsDelta": 4,
+        "renewals": 82,
+        "renewalsDelta": 1,
+        "revenue": 1420000,
+        "revenuePlan": 1365000,
+        "history": [
+          [
+            "Июн",
+            1210
+          ],
+          [
+            "Июл",
+            1150
+          ],
+          [
+            "Авг",
+            1090
+          ],
+          [
+            "Сен",
+            1380
+          ],
+          [
+            "Окт",
+            1400
+          ],
+          [
+            "Ноя",
+            1420
+          ]
+        ]
+      },
+      "alerts": [],
+      "photoPos": "center 40%"
+    },
+    {
+      "id": "karachaganak",
+      "type": "school",
+      "name": "Карачаганакская 43/1",
+      "addr": "9 микрорайон",
+      "manager": "Д. Петров",
+      "photo": "img/branches/karachaganak.jpg",
+      "tone": 2,
+      "metrics": {
+        "students": 96,
+        "studentsDelta": -8,
+        "attendance": 64,
+        "attendanceDelta": -6,
+        "leads": 23,
+        "leadsDelta": 5,
+        "renewals": 71,
+        "renewalsDelta": 2,
+        "revenue": 710000,
+        "revenuePlan": 910000,
+        "history": [
+          [
+            "Июн",
+            820
+          ],
+          [
+            "Июл",
+            760
+          ],
+          [
+            "Авг",
+            690
+          ],
+          [
+            "Сен",
+            880
+          ],
+          [
+            "Окт",
+            840
+          ],
+          [
+            "Ноя",
+            710
+          ]
+        ]
+      },
+      "alerts": [
+        {
+          "text": "Договор аренды истекает через 14 дней",
+          "section": "legal"
+        }
+      ],
+      "photoPos": "center 28%"
+    },
+    {
+      "id": "zachagansk",
+      "type": "school",
+      "name": "Шарабасова 17/1",
+      "addr": "Зачаганск, 20-я школа",
+      "manager": "М. Сидорова",
+      "photo": "img/branches/zachagansk.jpg",
+      "tone": 3,
+      "metrics": {
+        "students": 152,
+        "studentsDelta": 5,
+        "attendance": 82,
+        "attendanceDelta": 0,
+        "leads": 19,
+        "leadsDelta": -2,
+        "renewals": 78,
+        "renewalsDelta": 3,
+        "revenue": 1180000,
+        "revenuePlan": 1200000,
+        "history": [
+          [
+            "Июн",
+            1050
+          ],
+          [
+            "Июл",
+            990
+          ],
+          [
+            "Авг",
+            960
+          ],
+          [
+            "Сен",
+            1120
+          ],
+          [
+            "Окт",
+            1160
+          ],
+          [
+            "Ноя",
+            1180
+          ]
+        ]
+      },
+      "alerts": [],
+      "photoPos": "center 35%"
+    },
+    {
+      "id": "peremetnoe",
+      "type": "school",
+      "name": "Гагарина 60",
+      "addr": "Здание РДК, Переметное",
+      "manager": "С. Козлов",
+      "photo": null,
+      "tone": 4,
+      "metrics": {
+        "students": 121,
+        "studentsDelta": 0,
+        "attendance": 75,
+        "attendanceDelta": -1,
+        "leads": 14,
+        "leadsDelta": -3,
+        "renewals": 69,
+        "renewalsDelta": -4,
+        "revenue": 940000,
+        "revenuePlan": 1060000,
+        "history": [
+          [
+            "Июн",
+            980
+          ],
+          [
+            "Июл",
+            910
+          ],
+          [
+            "Авг",
+            880
+          ],
+          [
+            "Сен",
+            1010
+          ],
+          [
+            "Окт",
+            990
+          ],
+          [
+            "Ноя",
+            940
+          ]
+        ]
+      },
+      "alerts": [
+        {
+          "text": "Нужен тренер на вечерние группы",
+          "section": "hiring"
+        }
+      ]
+    },
+    {
+      "id": "derkul",
+      "type": "school",
+      "name": "п. Деркул",
+      "addr": "Дом культуры",
+      "manager": "Е. Морозова",
+      "photo": "img/branches/derkul.jpg",
+      "tone": 5,
+      "metrics": {
+        "students": 138,
+        "studentsDelta": 9,
+        "attendance": 84,
+        "attendanceDelta": 3,
+        "leads": 27,
+        "leadsDelta": 6,
+        "renewals": 80,
+        "renewalsDelta": 2,
+        "revenue": 1050000,
+        "revenuePlan": 1040000,
+        "history": [
+          [
+            "Июн",
+            900
+          ],
+          [
+            "Июл",
+            870
+          ],
+          [
+            "Авг",
+            850
+          ],
+          [
+            "Сен",
+            990
+          ],
+          [
+            "Окт",
+            1020
+          ],
+          [
+            "Ноя",
+            1050
+          ]
+        ]
+      },
+      "alerts": [],
+      "photoPos": "center 45%"
+    },
+    {
+      "id": "aksai",
+      "type": "school",
+      "name": "Жастар 58/2",
+      "addr": "Аксай",
+      "manager": "Н. Ахметов",
+      "photo": "img/branches/aksai.jpg",
+      "photoPos": "center 50%",
+      "tone": 3,
+      "metrics": {
+        "students": 117,
+        "studentsDelta": 7,
+        "attendance": 80,
+        "attendanceDelta": 1,
+        "leads": 21,
+        "leadsDelta": 3,
+        "renewals": 76,
+        "renewalsDelta": 2,
+        "revenue": 980000,
+        "revenuePlan": 950000,
+        "history": [
+          [
+            "Июн",
+            860
+          ],
+          [
+            "Июл",
+            830
+          ],
+          [
+            "Авг",
+            800
+          ],
+          [
+            "Сен",
+            910
+          ],
+          [
+            "Окт",
+            950
+          ],
+          [
+            "Ноя",
+            980
+          ]
+        ]
+      },
+      "alerts": []
+    },
+    {
+      "id": "shop",
+      "type": "shop",
+      "name": "Магазин",
+      "addr": "",
+      "manager": "И. Волков",
+      "photo": "img/branches/shop.jpg",
+      "tone": 6,
+      "metrics": {
+        "checks": 412,
+        "checksDelta": -6,
+        "avgCheck": 5730,
+        "avgCheckDelta": 120,
+        "lowStock": 12,
+        "returns": 7,
+        "revenue": 2360000,
+        "revenuePlan": 2740000,
+        "history": [
+          [
+            "Июн",
+            2510
+          ],
+          [
+            "Июл",
+            2380
+          ],
+          [
+            "Авг",
+            2620
+          ],
+          [
+            "Сен",
+            2840
+          ],
+          [
+            "Окт",
+            2590
+          ],
+          [
+            "Ноя",
+            2360
+          ]
+        ]
+      },
+      "alerts": [
+        {
+          "text": "12 позиций заканчиваются на складе",
+          "section": "stock"
+        }
+      ],
+      "photoPos": "center 40%"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "branchId": "karachaganak",
+      "title": "Продлить договор аренды помещения",
+      "section": "legal",
+      "due": "2026-11-20",
+      "done": false
+    },
+    {
+      "id": "t2",
+      "branchId": "karachaganak",
+      "title": "Заказать бинты и капы",
+      "section": "supply",
+      "due": "2026-11-22",
+      "done": false
+    },
+    {
+      "id": "t3",
+      "branchId": "karachaganak",
+      "title": "Собеседование: тренер на вечер",
+      "section": "hiring",
+      "due": "2026-11-28",
+      "done": false
+    },
+    {
+      "id": "t4",
+      "branchId": "karachaganak",
+      "title": "Запустить акцию «Приведи друга»",
+      "section": "marketing",
+      "due": "2026-12-01",
+      "done": false
+    },
+    {
+      "id": "t5",
+      "branchId": "kurmangazy",
+      "title": "Согласовать субаренду на субботу",
+      "section": "rent",
+      "due": "2026-11-29",
+      "done": false
+    },
+    {
+      "id": "t6",
+      "branchId": "kurmangazy",
+      "title": "Купить новые груши (2 шт.)",
+      "section": "supply",
+      "due": "2026-12-05",
+      "done": false
+    },
+    {
+      "id": "t7",
+      "branchId": "zachagansk",
+      "title": "Обновить фото зала для соцсетей",
+      "section": "marketing",
+      "due": "2026-12-03",
+      "done": false
+    },
+    {
+      "id": "t8",
+      "branchId": "peremetnoe",
+      "title": "Разместить вакансию тренера",
+      "section": "hiring",
+      "due": "2026-11-18",
+      "done": false
+    },
+    {
+      "id": "t9",
+      "branchId": "peremetnoe",
+      "title": "Проверить договор с уборкой",
+      "section": "legal",
+      "due": "2026-12-10",
+      "done": false
+    },
+    {
+      "id": "t10",
+      "branchId": "shop",
+      "title": "Дозаказать перчатки 12 oz",
+      "section": "supply",
+      "due": "2026-11-21",
+      "done": false
+    },
+    {
+      "id": "t11",
+      "branchId": "shop",
+      "title": "Инвентаризация склада",
+      "section": "stock",
+      "due": "2026-11-30",
+      "done": false
+    },
+    {
+      "id": "t12",
+      "branchId": "derkul",
+      "title": "Подготовить отчёт за ноябрь",
+      "section": "overview",
+      "due": "2026-12-02",
+      "done": true
+    },
+    {
+      "id": "t13",
+      "branchId": "aksai",
+      "title": "Заказать новые мешки в зал",
+      "section": "supply",
+      "due": "2026-12-04",
+      "done": false
+    }
+  ]
+}

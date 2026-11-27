@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1C — Выбор филиала (крупные фото)</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  header { text-align: center; margin: 16px 0 36px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+  .tile { overflow: hidden; display: block; transition: transform .25s, box-shadow .25s; padding: 8px; }
+  .tile:hover { transform: scale(1.015); box-shadow: var(--shadow-lg); }
+  .tile .photo { aspect-ratio: 16/8; border-radius: 13px; align-items: flex-end; justify-content: flex-start; }
+  .tile .photo > svg { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); }
+  .tile .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(0,0,0,.65)); }
+  .tile .over { position: relative; z-index: 1; padding: 20px 22px; color: #fff; width: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
+  .tile h3 { font-size: 26px; font-weight: 700; letter-spacing: -0.025em; }
+  .tile .addr { font-size: 14px; opacity: .8; margin-top: 2px; }
+  .tile .tasks { position: absolute; z-index: 2; top: 14px; right: 14px; }
+  .tile .st { position: absolute; z-index: 2; top: 14px; left: 14px; background: #fff; }
+  .strip { display: flex; gap: 24px; padding: 14px 14px 6px; align-items: center; }
+  .strip .v { font-size: 17px; font-weight: 700; }
+  .strip .grow { flex: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="h1">Выберите филиал</div>
+    <div class="sub">5 школ бокса и магазин спорттоваров</div>
+  </header>
+  <section class="grid" id="grid"></section>
+</div>
+
+<div class="variant-tag">Вариант 1C · Крупные фото, минимум данных <a href="index.html">все варианты</a></div>
+
+<script src="assets/data.js"></script>
+<script>
+document.getElementById('grid').innerHTML = BRANCHES.map(b => `
+  <a class="tile card" href="2B-dashboard-categories.html">
+    <div class="photo ${b.p}">
+      ${ICON_CAMERA}
+      <span class="pill st ${b.status}"><span class="dot ${b.status}"></span>${STATUS_TEXT[b.status]}</span>
+      ${tasksIcon(b)}
+      <div class="over"><div><h3>${b.name}</h3><div class="addr">${b.addr}</div></div></div>
+    </div>
+    <div class="strip">
+      ${b.type === 'school'
+        ? `<div><div class="label">Ученики</div><div class="v">${b.students} ${fmtDelta(b.studentsDelta)}</div></div>`
+        : `<div><div class="label">Чеки</div><div class="v">${b.checks} ${fmtDelta(b.checksDelta)}</div></div>`}
+      <div><div class="label">План выручки</div><div class="v">${fmtPlan(b.plan)}</div></div>
+      <div class="grow"></div>
+      ${ICON_CHEVRON}
+    </div>
+  </a>`).join('');
+</script>
+</body>
+</html>
